@@ -5,9 +5,10 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+
 header
 {
-    background-color: rgba(0, 0, 0, 0.658);
+    /* background-color: rgba(0, 0, 0, 0.658); */
     height:100vh;
     background-size: cover;
     background-position: center;
@@ -58,7 +59,9 @@ ul li a:hover
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
-  background: #f2f2f2;
+  background-image:url("images/bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -108,4 +111,8 @@ body{
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.black-bg-transparent
+{
+  background-color: rgba(40,40,40,0.6);
 }
