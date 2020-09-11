@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 11, 2020 at 08:19 AM
+-- Generation Time: Sep 11, 2020 at 10:19 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -24,9 +24,20 @@ CREATE TABLE `Locations` (
   `LocID` bigint(20) UNSIGNED NOT NULL,
   `Name` text NOT NULL,
   `Description` varchar(500) NOT NULL,
-  `Image` longblob NOT NULL,
+  `Address` longtext NOT NULL,
   `MapLat` float(6,2) NOT NULL,
   `MapLong` float(6,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `LocImages`
+--
+
+CREATE TABLE `LocImages` (
+  `LocID` bigint(20) UNSIGNED NOT NULL,
+  `Image` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -295,6 +306,13 @@ ALTER TABLE `Locations`
   ADD UNIQUE KEY `LocID` (`LocID`);
 
 --
+-- Indexes for table `LocImages`
+--
+ALTER TABLE `LocImages`
+  ADD UNIQUE KEY `LocID` (`LocID`),
+  ADD KEY `LocID_2` (`LocID`);
+
+--
 -- Indexes for table `Login`
 --
 ALTER TABLE `Login`
@@ -328,6 +346,12 @@ ALTER TABLE `Locations`
   MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `LocImages`
+--
+ALTER TABLE `LocImages`
+  MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `Login`
 --
 ALTER TABLE `Login`
@@ -348,6 +372,12 @@ ALTER TABLE `User`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `LocImages`
+--
+ALTER TABLE `LocImages`
+  ADD CONSTRAINT `locimages_ibfk_1` FOREIGN KEY (`LocID`) REFERENCES `Locations` (`LocID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Reviews`
