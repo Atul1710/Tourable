@@ -16,7 +16,7 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $insert = $db->query("INSERT into locations (location_name) VALUES ('$fileName')");
+            $insert = $db->query("INSERT INTO locimages (Image_Name) VALUES ($fileName)");
             if($insert){
                 $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
             }else{
@@ -31,7 +31,42 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
 }else{
     $statusMsg = 'Please select a file to upload.';
 }
+echo $statusMsg;
+
+if(isset($_POST["submit"]))
+{
+    $name = $_POST["name"];
+    if(!empty($name))
+    {
+        $num = mysqli_num_rows(mysqli_query($db, "SELECT * from locations where (Name = $name)"));
+        if($num > 0)
+        {
+            echo "Name already taken";
+        }
+        else
+        {
+            $insert1 = $db->query("INSERT into locations (Name) VALUES ($name)");
+            echo "Entered successfully!";
+        }
+    }
+    else{
+        echo "Enter valid username";
+    }
+}
+
+if(isset($_POST["submit"]))
+{
+    $desc = $_POST["desc"];
+    if(!empty($desc))
+    {
+        $insert1 = $db->query("INSERT into locations (Name) VALUES ($desc)");
+    }
+    }
+    else{
+        echo "Enter valid username";
+    }
+}
 
 // Display status message
-echo $statusMsg;
+// echo $statusMsg;
 ?>

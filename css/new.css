@@ -63,6 +63,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Open Sans', sans-serif;
+  background-attachment: fixed;
 }
 
 .search {
