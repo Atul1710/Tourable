@@ -1,5 +1,5 @@
 <?php
-    require 'dbconfig/config.php';
+    require 'Tourable_pages/dbConfig.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,42 +28,59 @@
     </div> -->
     <div class="login-box">
   <h1>Login</h1>
+  <form action="login.php" method="POST">
   <div class="textbox">
     <i class="fas fa-user"></i>
-    <input type="text" placeholder="Username">  
+    <input type="text" name="Username" placeholder="Username">  
   </div>
 
   <div class="textbox">
     <i class="fas fa-lock"></i>
-    <input type="password" placeholder="Password">
+    <input type="password" name="Password" placeholder="Password">
   </div>
+  <input type="text" id="UserID" name="UserID" hidden>
 
-  <input type="button" class="btn" value="Sign in">
-  <input type="button" class="btn" value="Sign Up">
+  <input type="submit" class="btn" name="submit_btn" value="Sign in">
+  <input type="submit" class="btn" value="Sign Up">
+  </form>
 </div>
 <?php
      if(isset($_POST['submit_btn']))
      {
-         $con = mysqli_connect("localhost","root","","logindb"); 
-         if($con->connect_error)
-             {
-                 die("Connection Failed:".$con->connect_error);
-             }
-             $username = $_POST["Username"];
-             $password = $_POST["Password"];          
-             
-             $query = "SELECT* FROM userinfo where Username = '$username' and password = '$password'";
-             $query_run = mysqli_query($con,$query);
+        //  $con = mysqli_connect("localhost","root","","logindb"); 
+        //  if($con->connect_error)
+            //  {
+                //  die("Connection Failed:".$con->connect_error);
+            //  }
+            $username = $_POST["Username"];
+            $password = $_POST["Password"];          
+            
+            $query = "SELECT * FROM Login WHERE Username = '$username' and Password = '$password'";
+            $query_run = mysqli_query($db, $query);
 
-             if(mysqli_num_rows($query_run)>0)
-             {
-                 $_SESSION['Username'] = $username;
-                 header('location:newhomepage.php');
-             }
-             else
-             {
+            if(mysqli_num_rows($query_run) == 1)
+            {
+                // session_start();
+                // echo '<script type = "text/javascript"> alert("started")</script>';
+                // $_SESSION["user"] = mysqli_fetch_row($query_run)[0];
+                $uid = mysqli_fetch_row($query_run)[0];
+                // echo '<script type = "text/javascript"> alert("' . $uid . '")</script>';
+                ?>
+                <form id="user_login" method="POST" action="newhomepage.php"> 
+                    <input type="text" name="UserID" id="UserID" value="<?php echo $uid; ?>">
+                    <input type="submit">
+                </form>
+                <script>
+                    document.getElementById('user_login').submit();
+                </script>
+                <?php
+                // header('location:newhomepage.php?userid=' . $uid);
+            }
+            else
+            {
                 echo '<script type = "text/javascript"> alert("Invalid Credentials")</script>';
-             }
+            }
+
     }
 
 ?>

@@ -2,8 +2,8 @@
 // Database configuration
 $dbHost     = "localhost";
 $dbUsername = "root";
-$dbPassword = "";
-$dbName     = 'tourable';
+$dbPassword = "root";
+$dbName     = 'Tourable';
 
 // Create database connection
 $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
