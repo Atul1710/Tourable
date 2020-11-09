@@ -66,19 +66,19 @@
     ?>    
     
 <div class="container-1">
-    <form action="upload1.php" method="post" enctype="multipart/form-data" class="location-form" autocomplete="off">
+    <form action="mapLocation.php" method="post" enctype="multipart/form-data" class="location-form" autocomplete="off">
     <table class="tb-1">
         <tr>
             <td>
             Select Image File to Upload:
-            <input type="file" name="file">
+            <input type="file" name="file" id = "file_name">
             </td>
         </tr>
 
         <tr>
             <td>
             Enter name of location: 
-            <input type="text" name = "loc_name">
+            <input type="text" name = "loc_name" id="loc_name">
         </td>
         </tr>
 
@@ -87,7 +87,7 @@
             Texts to upload:
             <!-- <input type="text" name="desc" id = "desc-box"> -->
             <textarea name="desc" id="desc-box" cols="30" rows="10"></textarea>
-            <input type="submit" name = "submit" value="Proceed to location coordinates upload" class="submit-btn">
+            <input type="submit" name = "submit" id = "submit" value="Proceed to location coordinates upload" class="submit-btn">
         </td>
         </tr>
     </table>

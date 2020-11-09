@@ -8,7 +8,7 @@
     <title>Login Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "css/login-style.css">
+    <link rel="stylesheet" href="css/homepage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
  </head>
  <!--
@@ -31,7 +31,7 @@
   <form action="login.php" method="POST">
   <div class="textbox">
     <i class="fas fa-user"></i>
-    <input type="text" name="Username" placeholder="Username">  
+    <input type="text" name="Username" placeholder="Username" autocomplete="off">  
   </div>
 
   <div class="textbox">
@@ -64,11 +64,15 @@
                 // echo '<script type = "text/javascript"> alert("started")</script>';
                 // $_SESSION["user"] = mysqli_fetch_row($query_run)[0];
                 $uid = mysqli_fetch_row($query_run)[0];
+                session_start();
+                $_SESSION['uname'] = $username;
+                $_SESSION['uid'] = $uid;
                 // echo '<script type = "text/javascript"> alert("' . $uid . '")</script>';
                 ?>
                 <form id="user_login" method="POST" action="newhomepage.php"> 
                     <input type="text" name="UserID" id="UserID" value="<?php echo $uid; ?>">
-                    <input type="submit">
+                    <input type="text" name="uname" id="uname" value = "<?php echo $username; ?>">
+                    <input type="submit" name="submit_BTN">
                 </form>
                 <script>
                     document.getElementById('user_login').submit();

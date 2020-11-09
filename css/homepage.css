@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+/* .main{
+    background-color: white;
+} */
+
+header {
+    background-color: rgba(40, 40, 40, 0.7);
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+}
+
+.black-bg-transparent {
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.726);
+}
+
+ul {
+    float: right;
+    list-style-type: none;
+    margin-top: 20px;
+}
+
+ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    border: 1px solid transparent;
+    transition: 0.4s ease;
+}
+
+ul li a:hover {
+    background-color: #fff;
+    color: #000000;
+}
+
+.search-text {
+    align-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: medium;
+    padding-left: 40px;
+    color: black;
+}
+
+
+/* .logo img{
+    float: left;
+    width: 150px;
+    height: auto;
+    padding: 35px 40px;
+} */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+body {
+    background-image: url("images/bg.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+    background-attachment: fixed;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    margin-left: 37px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+}
+
+.searchTerm:focus {
+    color: #00B4CC;
+}
+
+.searchButton {
+    width: 70px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.searchButton:hover {
+    background: white;
+    color: #00B4CC;
+    transition-delay: 1.7s ease;
+}
+
+
+/*Resize the wrap to see the search bar change!*/
+
+.wrap {
+    width: 50%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.userlogo {
+    height: 25px;
+    width: 25px;
+    margin-bottom: -7px;
+    margin-left: 10px;
+    margin-right: 8px;
+}
+
+.user-image {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
+
+.user-image img {}
+
+.details {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 40%;
+    padding: 2%;
+    background-color: rgba(40, 40, 40, 0.8);
+    font-size: large;
+    transform: translate(-50%, -30%);
+    display: flexbox;
+}
+
+.details img {
+    /* vertical-align: middle; */
+    margin-left: 60px;
+    margin-top: 10%;
+    margin-bottom: 20%;
+    /* height: 150px; */
+    width: 100px;
+    display: inline-block;
+}
+
+.details table {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 60px;
+    border-spacing: 10px;
+    border-collapse: collapse;
+    color: whitesmoke;
+    display: inline-block;
+}
+
+.details tr,
+td,
+th {
+    border: 0px solid grey;
+    padding: 10px;
+}
+
+.mod-row {
+    color: lightgray;
+    font-style: italic;
+    padding: -5px;
+    text-align: center;
+    transform: translate(0%, 50%);
+}
+
+
+
+
+
+
+
+
+
+
+ @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css"; 
+body{
+    margin: 0;
+    padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: aliceblue;
+    background-size: cover;
+  }
+  .login-box{
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 50px;
+    transform: translate(-50%,-50%);
+    background-color: rgba(40,40,40,0.8);
+  }
+  .login-box h1{
+    float: left;
+    font-size: 50px;
+    border-bottom: 6px solid #8D8741;
+    margin-bottom: 50px;
+    padding: 13px;
+    color: white;
+  }
+  .textbox{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid #8D8741;
+  }
+  .textbox i{
+    width: 26px;
+    float: left;
+    text-align: center;
+  }
+  .textbox input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+  }
+  .btn{
+    width: 100%;
+    background: none;
+    border: 2px solid #8D8741;
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 4px 0;
+    transition: 0.2s ease;   
+  }
+  
+  .btn:hover
+  {
+      background:#8D8741;
+      color: white;
+  }

@@ -1,6 +1,7 @@
 <?php
 // Include the database configuration file
 include 'dbConfig.php';
+
 $statusMsg = '';
 
 
@@ -122,6 +123,7 @@ if(isset($_POST["submit"]))
 
 // Display status message
 // echo $statusMsg;
+    require "mapLocation.php";
 ?>
 
 
