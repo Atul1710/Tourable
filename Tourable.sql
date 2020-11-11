@@ -1,62 +1,108 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Sep 11, 2020 at 10:19 AM
--- Server version: 5.7.26
--- PHP Version: 7.4.2
+-- Host: 127.0.0.1
+-- Generation Time: Nov 10, 2020 at 11:51 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Database: `Tourable`
+-- Database: `tourable`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Locations`
+-- Table structure for table `locations`
 --
 
-CREATE TABLE `Locations` (
+CREATE TABLE `locations` (
   `LocID` bigint(20) UNSIGNED NOT NULL,
   `Name` text NOT NULL,
-  `Description` varchar(500) NOT NULL,
-  `Address` longtext NOT NULL,
-  `MapLat` float(6,2) NOT NULL,
-  `MapLong` float(6,2) NOT NULL
+  `Description` varchar(500) DEFAULT NULL,
+  `Address` longtext DEFAULT NULL,
+  `MapLat` float(10,6) DEFAULT NULL,
+  `MapLong` float(10,6) DEFAULT NULL,
+  `uploaded_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`LocID`, `Name`, `Description`, `Address`, `MapLat`, `MapLong`, `uploaded_on`) VALUES
+(349, 'Area 51', 'Area 51 is the common name of a highly classified United States Air Force facility located within the Nevada Test and Training Range. A remote detachment administered by Edwards Air Force Base, the facility is officially called Homey Airport or Groom Lake, named after the salt flat situated next to its airfield', NULL, 37.306210, -115.856827, '2020-10-25 12:55:42'),
+(350, 'Lakshadweep', 'Lakshadweep is a tropical archipelago of 36 atolls and coral reefs in the Laccadive Sea, off the coast of Kerala, India. Not all of the islands are inhabited, and only a few are open to visitors (permits required). Kavaratti, one of the more developed islands, is home to dozens of mosques, including the ornately decorated Ujra Mosque, as well as Kavaratti Aquarium, showcasing regional fish, shark and coral species.', NULL, 10.564701, 72.638451, '2020-10-25 13:30:34'),
+(353, 'Sea', 'Sea', NULL, 37.932426, -123.484245, '2020-10-25 13:44:03'),
+(355, 'Meenakshi temple', 'Meenakshi Temple is a historic Hindu temple located on the southern bank of the Vaigai River in the temple city of Madurai, Tamil Nadu, India.', NULL, NULL, NULL, '2020-10-31 11:02:55'),
+(356, 'Meenakshi Temple', 'Historic temple', NULL, NULL, NULL, '2020-10-31 12:08:22'),
+(357, 'Munnar', 'Munnar is a town and hill station located in the Idukki district of the southwestern Indian state of Kerala. Munnar is situated at around 1,600 metres (5,200 ft) above mean sea level,[2] in the Western Ghats mountain range. Munnar is also called the \"Kashmir of South India\" and is a popular honeymoon destination.', NULL, 21.468819, -149.216278, '2020-10-31 16:09:36');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `LocImages`
+-- Table structure for table `location_images`
 --
 
-CREATE TABLE `LocImages` (
+CREATE TABLE `location_images` (
+  `LocID` int(100) NOT NULL,
+  `loc_image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `location_images`
+--
+
+INSERT INTO `location_images` (`LocID`, `loc_image`) VALUES
+(0, 'beach.jpeg'),
+(349, 'area51.jpg'),
+(350, 'big.jpg'),
+(352, 'area51.jpg'),
+(353, 'area51.jpg'),
+(354, 'dog2.jpg'),
+(355, 'SrirangamTemple.jpg'),
+(357, 'big.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locimages`
+--
+
+CREATE TABLE `locimages` (
   `LocID` bigint(20) UNSIGNED NOT NULL,
-  `Image` longblob NOT NULL
+  `Image_Name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Login`
+-- Table structure for table `login`
 --
 
-CREATE TABLE `Login` (
+CREATE TABLE `login` (
   `UID` bigint(20) UNSIGNED NOT NULL,
   `Username` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Login`
+-- Dumping data for table `login`
 --
 
-INSERT INTO `Login` (`UID`, `Username`, `Password`) VALUES
+INSERT INTO `login` (`UID`, `Username`, `Password`) VALUES
 (1, 'Katie_Louise5144', 'Huff3395'),
 (2, 'Matias1569', 'Acevedo4716'),
 (3, 'Alissia1802', 'Kenny1521'),
@@ -161,38 +207,45 @@ INSERT INTO `Login` (`UID`, `Username`, `Password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Reviews`
+-- Table structure for table `review`
 --
 
-CREATE TABLE `Reviews` (
-  `RID` bigint(20) UNSIGNED NOT NULL,
-  `UID` bigint(20) UNSIGNED NOT NULL,
-  `LocID` bigint(20) UNSIGNED NOT NULL,
-  `Description` varchar(500) NOT NULL,
-  `Rating` float UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `review` (
+  `rid` int(100) NOT NULL,
+  `username` varchar(1000) NOT NULL,
+  `locname` varchar(100) NOT NULL,
+  `rev` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`rid`, `username`, `locname`, `rev`) VALUES
+(1, 'Katie', 'Lakshadweep', 'Great place, must visit'),
+(2, 'Kristi8249', 'Lakshadweep', 'very nice place!');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `UID` bigint(20) UNSIGNED NOT NULL,
   `Name` text NOT NULL,
   `DOB` date NOT NULL,
   `Gender` text NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Contact` bigint(10) NOT NULL,
-  `Moderator` tinyint(1) NOT NULL DEFAULT '0'
+  `Moderator` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `User` (`UID`, `Name`, `DOB`, `Gender`, `Email`, `Contact`, `Moderator`) VALUES
+INSERT INTO `user` (`UID`, `Name`, `DOB`, `Gender`, `Email`, `Contact`, `Moderator`) VALUES
 (1, 'Katie-Louise Huff', '1989-01-30', 'Female', 'katie-louise@hotmail.com', 8331730626, 0),
 (2, 'Matias Acevedo', '1988-04-03', 'Male', 'matias@outlook.com', 8553944890, 0),
 (3, 'Alissia Kenny', '1992-11-13', 'Female', 'alissia@outlook.com', 7162195549, 0),
@@ -299,39 +352,41 @@ INSERT INTO `User` (`UID`, `Name`, `DOB`, `Gender`, `Email`, `Contact`, `Moderat
 --
 
 --
--- Indexes for table `Locations`
+-- Indexes for table `locations`
 --
-ALTER TABLE `Locations`
+ALTER TABLE `locations`
   ADD PRIMARY KEY (`LocID`),
   ADD UNIQUE KEY `LocID` (`LocID`);
 
 --
--- Indexes for table `LocImages`
+-- Indexes for table `location_images`
 --
-ALTER TABLE `LocImages`
-  ADD UNIQUE KEY `LocID` (`LocID`),
-  ADD KEY `LocID_2` (`LocID`);
+ALTER TABLE `location_images`
+  ADD UNIQUE KEY `LocID` (`LocID`);
 
 --
--- Indexes for table `Login`
+-- Indexes for table `locimages`
 --
-ALTER TABLE `Login`
+ALTER TABLE `locimages`
+  ADD UNIQUE KEY `LocID` (`LocID`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
   ADD PRIMARY KEY (`UID`),
   ADD UNIQUE KEY `UID` (`UID`);
 
 --
--- Indexes for table `Reviews`
+-- Indexes for table `review`
 --
-ALTER TABLE `Reviews`
-  ADD PRIMARY KEY (`RID`),
-  ADD UNIQUE KEY `RID` (`RID`),
-  ADD KEY `UID` (`UID`),
-  ADD KEY `LocID` (`LocID`);
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`rid`);
 
 --
--- Indexes for table `User`
+-- Indexes for table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`UID`),
   ADD UNIQUE KEY `UID` (`UID`);
 
@@ -340,33 +395,33 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT for table `Locations`
+-- AUTO_INCREMENT for table `locations`
 --
-ALTER TABLE `Locations`
-  MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `locations`
+  MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
 
 --
--- AUTO_INCREMENT for table `LocImages`
+-- AUTO_INCREMENT for table `locimages`
 --
-ALTER TABLE `LocImages`
-  MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `locimages`
+  MODIFY `LocID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `Login`
+-- AUTO_INCREMENT for table `login`
 --
-ALTER TABLE `Login`
+ALTER TABLE `login`
   MODIFY `UID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `Reviews`
+-- AUTO_INCREMENT for table `review`
 --
-ALTER TABLE `Reviews`
-  MODIFY `RID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `review`
+  MODIFY `rid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `User`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   MODIFY `UID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
@@ -374,20 +429,18 @@ ALTER TABLE `User`
 --
 
 --
--- Constraints for table `LocImages`
+-- Constraints for table `locimages`
 --
-ALTER TABLE `LocImages`
-  ADD CONSTRAINT `locimages_ibfk_1` FOREIGN KEY (`LocID`) REFERENCES `Locations` (`LocID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `locimages`
+  ADD CONSTRAINT `locimages_ibfk_1` FOREIGN KEY (`LocID`) REFERENCES `locations` (`LocID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Reviews`
+-- Constraints for table `user`
 --
-ALTER TABLE `Reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `Login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`LocID`) REFERENCES `Locations` (`LocID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
---
--- Constraints for table `User`
---
-ALTER TABLE `User`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `Login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
