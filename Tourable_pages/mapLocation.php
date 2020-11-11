@@ -32,8 +32,8 @@ if(isset($_POST["submit"]))
         // else
         // { }
         // $insert1 = $db->query("INSERT into locations (Name) VALUES ($name)");
-        echo "<script type='text/javascript'>alert('Location name is valid');</script>";
-        echo "<script type='text/javascript'>alert('Location description is valid');</script>";
+        // echo "<script type='text/javascript'>alert('Location name is valid');</script>";
+        // echo "<script type='text/javascript'>alert('Location description is valid');</script>";
         $insert1 = $db->query("INSERT into locations (Name, Description) VALUES ('$name', '$desc')");
         $sql1 = $db->query("SELECT LocID from locations where `Name` = '$name'");
         $id1 = mysqli_fetch_array($sql1);
@@ -49,39 +49,39 @@ if(isset($_POST["submit"]))
     else{
       if(!empty($name) && strlen($name) <= 100){
         $message = "Location name is valid";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if(!empty($desc) && strlen($desc) <= 1000){
         $message = "Location description is valid";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if(strlen($name) > 100){
         $message = "Location name is invalid(exceeded max size)";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if(strlen($desc) > 1000)
       {
         $message = "Location description is invalid(exceeded max size)";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if(empty($name)){
         $message = "Location name is mandatory";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if(empty($desc)){
         $message = "Location description is mandatory";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
 
       if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $name))
       {
         $message = "Location name should not have special characters";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
       }
     }
 
@@ -120,18 +120,18 @@ if(isset($_POST["submit"]))
         else{
             $statusMsg = 'Invalid file type';
         }
-        echo "<script type='text/javascript'>alert('$statusMsg');</script>";
+        // echo "<script type='text/javascript'>alert('$statusMsg');</script>";
 
-        $file = 'uploads/munnar.jpg';
-        $fileSizeBytes = filesize($file);
-        $fileSizeMB = ($fileSizeBytes/1024/1024);
-        $fileSizeMB = number_format($fileSizeMB, 2);
-        if($fileSizeMB <= 5){
-          echo "<script type='text/javascript'>alert('Image size is valid');</script>";
-        }
-        else{
-          echo "<script type='text/javascript'>alert('Image is invalid, exceeded size limit');</script>";
-        }
+        // $file = 'uploads/munnar.jpg';
+        // $fileSizeBytes = filesize($file);
+        // $fileSizeMB = ($fileSizeBytes/1024/1024);
+        // $fileSizeMB = number_format($fileSizeMB, 2);
+        // if($fileSizeMB <= 5){
+        //   // echo "<script type='text/javascript'>alert('Image size is valid');</script>";
+        // }
+        // else{
+        //   // echo "<script type='text/javascript'>alert('Image is invalid, exceeded size limit');</script>";
+        // }
     }
 }
     else

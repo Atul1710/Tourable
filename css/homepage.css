@@ -52,6 +52,9 @@ ul li a:hover {
     color: black;
 }
 
+.search-box{
+    width: 50%;
+}
 
 /* .logo img{
     float: left;

@@ -16,8 +16,9 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="css/homepage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <!-- jQuery UI
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -29,7 +30,7 @@
     // }
     ?>
     <script>
-        alert("Logged In Successfully!");
+        // alert("Logged In Successfully!");
         
         function destroy() {
             session_destroy();
@@ -43,7 +44,7 @@
             <ul>
                 <li class="active"><a href="homepage.html" onclick=destroy()>Logout</a></li>
                 <li><a href="Tourable_pages/image-storage-display.php">Location Input</a></li>
-                <!-- <form action="UserInfo.php" method="POST">s -->
+                <!-- <form action="UserInfo.php" method="POST"> -->
                 <li><a href="Tourable_pages/UserInfo.php">User Info <img src="Tourable_pages/images/user-logo.png" alt="" class="userlogo"></a></li>
                 <form action="homepage.html"></form>
             </ul>
@@ -57,7 +58,10 @@
             <br>
             <div class="search">
                 <form action="Tourable_pages/list-locations.php" method="POST">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?" class="search-box" id="search-box" name="search-box">
+                <!-- <input type="text" class="searchTerm" placeholder="What are you looking for?" class="search-box" id="search-box" name="search-box"> <br> -->
+                <div class="md-form mt-0">
+                    <input class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search" id="search-box" name="search-box">
+                </div>
                 <button type="submit" class="searchButton" name="submit1">
                     <i class="fa fa-search">search</i>
                 </button>

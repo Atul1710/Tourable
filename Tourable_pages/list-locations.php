@@ -66,6 +66,9 @@
             $des = $row['Description'];
             $desQuery = "SELECT LEFT('$des', 20)"; //gets 20 characters from description
             $desRes = $db->query("$desQuery");
+            $loc_id = $row['LocID'];
+            $locid = "SELECT * from `location_images` where `LocID` = '$loc_id'";
+            $sql1 = $db->query($locid);
 ?>
 
 <div class="container py-2">
@@ -83,7 +86,7 @@
                                 <p class="font-italic text-muted mb-0 small"><?php echo $des; ?></p>
                                 <div class="d-flex align-items-center justify-content-between mt-1">
                                     <form action="display-page.php" method="POST">
-                                        <input type="hidden" value="<?php echo $name; ?>" name="name">
+                                        <input type="hidden" value="<?php echo $name; ?>" name = "loc-name" id = "loc-name">
                                         <input type = "submit" class ="btn btn-success" style="color:black;" value="visit" name="visit">
                                     </form>
                                     <ul class="list-inline small">
@@ -99,7 +102,7 @@
                                         <span class="fa fa-star"></span>
                                     </ul>
                                 </div>
-                            </div><img src="uploads/beach.jpeg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            </div><img src = "uploads/<?php while($row1 = $sql1->fetch_assoc()){ echo $row1['loc_image']; }?>" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                     </div> <!-- End -->
         </div>
         </div>

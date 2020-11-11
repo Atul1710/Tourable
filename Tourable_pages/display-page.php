@@ -10,31 +10,46 @@
     
     <link rel="stylesheet" href="css/display-style.css"> 
     <title>Display Location</title>
+    <style>
+        body{
+            background-image: url("uploads/bg1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body> 
+
 <?php 
-include "dbConfig.php";
 session_start();
+include "dbConfig.php";
 
 $uname = $_SESSION['uname']; //username
 if(isset($_POST['visit']))
 {
-    $locname = $_POST['name'];
-    echo $locname; //location name
+    $locname = $_POST['loc-name'];
+    // echo $locname; //location name
     $sql = "SELECT * from `locations` where `Name` = '$locname'";
     $res = $db->query($sql);
     
 
     while($row = $res->fetch_assoc()){
-
+        $locid = $row['LocID'];
+        $SQL2 = "SELECT * from `location_images` where `LocID` = '$locid'";
+        $RES2 = $db->query($SQL2);
 ?>
 <header>
         <div class = "main">
             <ul>
-                <li class="active"><a href="homepage.html" onclick=destroy()>Logout</a></li>
+                <br>
+                <li>
+                    <a href="list-locations.php" class="btn btn-success">Back</a>
+
+                </li>
+                <!-- <li class="active"><a href="homepage.html" onclick=destroy()>Logout</a></li>
                 <li><a href="Tourable_pages/image-storage-display.php">Location Input</a></li>
                 <li><a href="Tourable_pages/UserInfo.php">User Info <img src="Tourable_pages/images/user-logo.png" alt="" class="userlogo"></a></li>
-                <form action="homepage.html"></form>
+                <form action="homepage.html"></form> -->
             </ul>
         </div>
     </header>
@@ -54,7 +69,7 @@ if(isset($_POST['visit']))
                         <div class="carousel-inner">
                             <!-- Slide 1 -->
                             <div class="item active">
-                                <img src="https://via.placeholder.com/700x400/FFB6C1/000000" class="img-responsive" alt="" />
+                                <img src="uploads/<?php while($ROW2 = $RES2->fetch_assoc()){ echo $ROW2['loc_image']; }?>" class="img-responsive" alt="" />
                             </div>
                             <!-- Slide 2 -->
                             <div class="item">
@@ -80,8 +95,8 @@ if(isset($_POST['visit']))
                     <i class="fa fa-star fa-2x text-primary"></i>
                     <i class="fa fa-star fa-2x text-primary"></i>
                     <i class="fa fa-star fa-2x text-muted"></i>
-                    <span class="fa fa-2x"><h5>(109) Votes</h5></span>
-                    <a href="javascript:void(0);">109 customer reviews</a>
+                    <!-- <span class="fa fa-2x"><h5>(109) Votes</h5></span>
+                    <a href="javascript:void(0);">109 customer reviews</a> -->
                 </h2>
                 <hr/>
                 
@@ -89,7 +104,7 @@ if(isset($_POST['visit']))
                 
                 <div class="description description-tabs">
                     <ul id="myTab" class="nav nav-pills">
-                        <li class="active"><a href="#more-information" data-toggle="tab" class="no-margin">Product Description </a></li>
+                        <li class="active"><a href="#more-information" data-toggle="tab" class="no-margin">Location Description </a></li>
                         <!-- <li class=""><a href="#specifications" data-toggle="tab">Specifications</a></li> -->
                         <li class=""><a href="#reviews" data-toggle="tab">Reviews</a></li>
                     </ul>
@@ -120,11 +135,13 @@ if(isset($_POST['visit']))
                         </div> -->
                         <div class="tab-pane fade" id="reviews">
                             <br />
-                            <form method="POST" class="well padding-bottom-10" onsubmit="return false;" action="post-review.php">
+                            <form method="POST" class="well padding-bottom-10" action="display-page.php">
                                 <input type= "text" class="form-control" placeholder="Write a review" name="review">
-                                <input type="hidden" name="loc-name" id="loc-name" value="<?php echo $row['review'];?>">
+                                <input type="hidden" name="loc-name" id="loc-name" value="<?php echo $locname;?>">
+                                <input type="submit" class="btn btn-sm btn-primary pull-right" value="Submit Review" name = "submit-review">
+
                                 <div class="margin-top-10">
-                                    <input type="submit" class="btn btn-sm btn-primary pull-right" value="Submit Review" name="submit-review">
+                                    <!-- <input type="submit" class="btn btn-sm btn-primary pull-right" value="Submit Review" name="submit-review"> -->
                                     <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Location"><i class="fa fa-location-arrow"></i></a>
                                     <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Voice"><i class="fa fa-microphone"></i></a>
                                     <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Photo"><i class="fa fa-camera"></i></a>
@@ -138,17 +155,17 @@ if(isset($_POST['visit']))
                                 <ul>
 
                                 <?php 
-                                $rev = "SELECT * from `reviews` where locname = '$locname'";
+                                $rev = "SELECT * from `review` where `locname` = '$locname'";
                                 $revres = $db->query($rev);
                                 while($revrow = $revres->fetch_assoc()){                                   
                             ?>
 
 
                                     <li class="message">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online"/>
                                         <span class="message-text">
                                             <a href="javascript:void(0);" class="username">
-                                                <?php echo $revrow['uname'] ?>
+                                                <?php echo $revrow['username'] ?>
                                                 <!-- <span class="badge">Purchase Verified</span> -->
                                                 <span class="pull-right">
                                                     <i class="fa fa-star fa-2x text-primary"></i>
@@ -163,13 +180,18 @@ if(isset($_POST['visit']))
                                         </span>
                                         <ul class="list-inline font-xs">
                                             <li>
-                                                <a href="javascript:void(0);" class="text-info"><i class="fa fa-thumbs-up"></i> This was helpful (22)</a>
+                                                <a href="javascript:void(0);" class="text-info"><i class="fa fa-thumbs-up"></i> This was helpful (22)</a> 
                                             </li>
                                             <li class="pull-right">
-                                                <small class="text-muted pull-right ultra-light"> Posted 1 year ago </small>
+                                                <form action="display-page.php" method="POST">
+                                                    <input type="hidden" name = "review" value="<?php echo $revrow['rid']; ?>">
+                                                    <input type="submit" name="delete-review" class="btn btn-danger" value="Delete" value="X">
+                                                </form>
+                                                <!-- <button type="submit" name="delete-review" class="btn btn-danger" value="Delete">X</button> -->
                                             </li>
                                         </ul>
                                     </li>
+                                    <br>
 
                                     <?php
                                     
@@ -210,12 +232,18 @@ if(isset($_POST['visit']))
                 <hr />
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
-                        <a href="javascript:void(0);" class="btn btn-success btn-lg">Visit!</a>
+                    <form action="ViewOnMap.php" method="POST">
+                        <input type="hidden" name="lat" value="<?php echo $row['MapLat'];?>">
+                        <input type="hidden" name="long" value = "<?php echo $row['MapLong']?>">
+                        <input type="hidden" name="loc-name" value="<?php echo $locname;?>"> 
+                        <input type="submit" class="btn btn-success btn-lg" name="visit" value="Visit!">
+                        <!-- <a href="javascript:void(0);" class="btn btn-success btn-lg">Visit!</a> -->
+                        </form>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="btn-group pull-right">
                             <button class="btn btn-white btn-default"><i class="fa fa-star"></i> Add to wishlist</button>
-                            <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> Contact Seller</button>
+                            <!-- <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> Contact Seller</button> -->
                         </div>
                     </div>
                 </div>
@@ -230,6 +258,22 @@ if(isset($_POST['visit']))
 
 <?php 
     }
+}
+
+$uname = $_SESSION['uname'];
+    echo $uname;
+    if(isset($_POST['submit-review'])){
+        $loc_name = $_POST['loc-name'];
+        $review = $_POST['review'];
+        echo $loc_name;
+        echo $review;
+        $sql = "INSERT into `review` (`username`, `locname`, `rev`) values ('$uname', '$loc_name', '$review')";
+        $res = $db->query($sql);
+    }
+if(isset($_POST['delete-review'])){
+        $reviewid = $_POST['review'];
+        $sql1 = "DELETE from `review` where rid = '$reviewid'";
+        $db->query($sql1);
 }
 ?>
 </html>
