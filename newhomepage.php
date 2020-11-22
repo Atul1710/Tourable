@@ -38,39 +38,31 @@
     </script>
 </head>
 <body>
-    <div class = "black-bg-transparent">
+    <div class="black-bg-transparent">
     <header>
-        <div class = "main">
+        <div class="main">
             <ul>
                 <li class="active"><a href="homepage.html" onclick=destroy()>Logout</a></li>
                 <li><a href="Tourable_pages/image-storage-display.php">Location Input</a></li>
-                <!-- <form action="UserInfo.php" method="POST"> -->
                 <li><a href="Tourable_pages/UserInfo.php">User Info <img src="Tourable_pages/images/user-logo.png" alt="" class="userlogo"></a></li>
                 <form action="homepage.html"></form>
             </ul>
         </div>
     </header>
         
-        <div class="wrap">
-            <div class = "search-text">
-                Search for a place you think will be interesting!
-            </div>
-            <br>
-            <div class="search">
-                <form action="Tourable_pages/list-locations.php" method="POST">
-                <!-- <input type="text" class="searchTerm" placeholder="What are you looking for?" class="search-box" id="search-box" name="search-box"> <br> -->
-                <div class="md-form mt-0">
-                    <input class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search" id="search-box" name="search-box">
-                </div>
-                <button type="submit" class="searchButton" name="submit1">
-                    <i class="fa fa-search">search</i>
-                </button>
-              </form>
-
-            </div>            
-         </div> 
-
-</div>
+    <div class="wrap">
+        <div class="search-text">
+            Search for a place you think will be interesting!
+        </div>
+        <br>
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search">search</i>
+            </button>
+        </div>
+    </div>
+    </div>
 
 
 </body>

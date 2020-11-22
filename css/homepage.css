@@ -3,7 +3,9 @@
     padding: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-/* .main{
+
+
+/* .main {
     background-color: white;
 } */
 
@@ -19,6 +21,31 @@ header {
     background-color: rgba(0, 0, 0, 0.726);
 }
 
+ul {
+    float: right;
+    list-style-type: none;
+    padding-top: 20px;
+}
+
+ul li {
+    display: inline-block;
+}
+
+ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 15px 20px;
+    border: 1px solid transparent;
+    transition: 0.4s ease;
+}
+
+ul li a:hover {
+    background-color: #fff;
+    color: #000000;
+}
+
+
+/*
 ul {
     float: right;
     list-style-type: none;
@@ -42,6 +69,7 @@ ul li a:hover {
     background-color: #fff;
     color: #000000;
 }
+*/
 
 .search-text {
     align-content: center;
@@ -52,9 +80,10 @@ ul li a:hover {
     color: black;
 }
 
-.search-box{
+.search-box {
     width: 50%;
 }
+
 
 /* .logo img{
     float: left;
@@ -83,11 +112,11 @@ body {
     border: 3px solid #00B4CC;
     border-right: none;
     padding: 5px;
-    margin-left: 37px;
-    height: 20px;
+    height: 37px;
     border-radius: 5px 0 0 5px;
     outline: none;
     color: #9DBFAF;
+    display: inline;
 }
 
 .searchTerm:focus {
@@ -104,6 +133,7 @@ body {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     font-size: 20px;
+    display: inline;
 }
 
 .searchButton:hover {
@@ -123,11 +153,10 @@ body {
     transform: translate(-50%, -50%);
 }
 
-
 .userlogo {
     height: 25px;
     width: 25px;
-    margin-bottom: -7px;
+    margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 8px;
 }
@@ -187,54 +216,50 @@ th {
     transform: translate(0%, 50%);
 }
 
-
-
-
-
-
-
-
-
-
- @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css"; 
-body{
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+body {
     margin: 0;
     padding: 0;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: aliceblue;
     background-size: cover;
-  }
-  .login-box{
+}
+
+.login-box {
     width: 280px;
     position: absolute;
     top: 50%;
     left: 50%;
     padding: 50px;
-    transform: translate(-50%,-50%);
-    background-color: rgba(40,40,40,0.8);
-  }
-  .login-box h1{
+    transform: translate(-50%, -50%);
+    background-color: rgba(40, 40, 40, 0.8);
+}
+
+.login-box h1 {
     float: left;
     font-size: 50px;
     border-bottom: 6px solid #8D8741;
     margin-bottom: 50px;
     padding: 13px;
     color: white;
-  }
-  .textbox{
+}
+
+.textbox {
     width: 100%;
     overflow: hidden;
     font-size: 20px;
     padding: 8px 0;
     margin: 8px 0;
     border-bottom: 1px solid #8D8741;
-  }
-  .textbox i{
+}
+
+.textbox i {
     width: 26px;
     float: left;
     text-align: center;
-  }
-  .textbox input{
+}
+
+.textbox input {
     border: none;
     outline: none;
     background: none;
@@ -243,8 +268,9 @@ body{
     width: 80%;
     float: left;
     margin: 0 10px;
-  }
-  .btn{
+}
+
+.btn {
     width: 100%;
     background: none;
     border: 2px solid #8D8741;
@@ -253,11 +279,10 @@ body{
     font-size: 20px;
     cursor: pointer;
     margin: 4px 0;
-    transition: 0.2s ease;   
-  }
-  
-  .btn:hover
-  {
-      background:#8D8741;
-      color: white;
-  }
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    background: #8D8741;
+    color: white;
+}
