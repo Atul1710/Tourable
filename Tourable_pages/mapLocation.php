@@ -1,12 +1,10 @@
+<?php
+	require 'dbConfig.php';
+?>
 <!DOCTYPE html>
 <html>
 <?php
-// Include the database configuration file
-include 'dbConfig.php';
-
 $statusMsg = '';
-
-
 
 // File upload path
 $targetDir = "uploads/";
@@ -39,14 +37,15 @@ if(isset($_POST["submit"]))
         $id1 = mysqli_fetch_array($sql1);
         $locID = $id1['LocID'];
         $globalLocID = $locID;
-        echo "First operation done!\n";
+        // echo "<script>alert('First operation done!')</script>\n";
         if(mysqli_query($db,$insert1))
         {
             echo "Entered successfully!\n";                
         }
     }
 
-    else{
+    else
+    {
       if(!empty($name) && strlen($name) <= 100){
         $message = "Location name is valid";
         // echo "<script type='text/javascript'>alert('$message');</script>";
@@ -83,7 +82,7 @@ if(isset($_POST["submit"]))
         $message = "Location name should not have special characters";
         // echo "<script type='text/javascript'>alert('$message');</script>";
       }
-    }
+  }
 
 
     // $desc = $_POST["desc"];
@@ -100,23 +99,23 @@ if(isset($_POST["submit"]))
     if(!empty($_FILES["file"]["name"]))
     {
         // Allow certain file formats
-    $allowTypes = array('jpg','png','jpeg');
-    if(in_array($fileType, $allowTypes))
-    {
-        // Upload file to server
-        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-            // Insert image file name into database  
-            $insert = $db->query("INSERT INTO location_images (LocID, loc_image) VALUES ('$locID','$fileName')");
-            if($insert){
-                $statusMsg1 = "The file ".$fileName. " has been uploaded successfully.";
-                $statusMsg = "Picture is valid";
+        $allowTypes = array('jpg','png','jpeg');
+        if(in_array($fileType, $allowTypes))
+        {
+            // Upload file to server
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                // Insert image file name into database  
+                $insert = $db->query("INSERT INTO location_images (LocID, loc_image) VALUES ('$locID','$fileName')");
+                if($insert){
+                    $statusMsg1 = "The file ".$fileName. " has been uploaded successfully.";
+                    $statusMsg = "Picture is valid";
+                }else{
+                    $statusMsg = "File upload failed, please try again.";
+                } 
             }else{
-                $statusMsg = "File upload failed, please try again.";
-            } 
-        }else{
-            $statusMsg = "Sorry, there was an error uploading your file.";  
+                $statusMsg = "Sorry, there was an error uploading your file.";  
+            }
         }
-    }
         else{
             $statusMsg = 'Invalid file type';
         }
@@ -186,7 +185,7 @@ if(isset($_POST["submit"]))
 
 
   <head>
-    <title>ORIGINAL MAP</title>
+    <title>Location on the Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJazIa8wi_O1vvrPtGQ968Akncslka-NA&callback=initMap&libraries=&v=weekly"
@@ -196,7 +195,12 @@ if(isset($_POST["submit"]))
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+		height: 50%;
+		width: 56.9%;
+		position: relative;
+		top: 30%;
+		left: 50%;
+		transform: translate(-50%, -50%);
       }
 
       /* Optional: Makes the sample page fill the window. */
@@ -205,7 +209,40 @@ if(isset($_POST["submit"]))
         height: 100%;
         margin: 0;
         padding: 0;
-      }
+	  }
+	  
+	  body {
+		background-image: url('images/bg1.jpeg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		justify-content: center;
+		font-family: 'Roboto', sans-serif;
+	  }
+
+	  .map-box {
+		width: 53%;
+		margin-top: 150px;
+		margin-bottom: 90px;
+		position: relative;
+		top: 5%;
+		left: 50%;
+		padding: 30px;
+		transform: translate(-50%, -50%);
+		background-color: rgba(40, 40, 40, 0.8);
+		text-align: center;
+		color: white;
+	  }
+
+	  .map-box h2 {
+		/* font-size: 50px; */
+		border-bottom: 6px solid #8D8741;
+		/* margin-bottom: 50px; */
+		padding: 13px;
+    position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		color: white;
+	  }
 
       #floating-panel {
         position: absolute;
@@ -224,27 +261,27 @@ if(isset($_POST["submit"]))
       }
     </style>
     
+    <!-- This script is used to place markers when the user clicks on the map -->
     <script>
-      // In the following example, markers appear when the user clicks on the map.
-      // The markers are stored in an array.
-      // The user can then click an option to hide, show or delete the markers.
-      let map;
-      let markers = [];
-      
-      function initMap() {
-        const haightAshbury = { lat: 37.769, lng: -122.446 };
-        map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 12,
-          center: haightAshbury,
-          mapTypeId: "terrain",
-        });
-        // This event listener will call addMarker() when the map is clicked.
-        map.addListener("click", (event) => {
-          addMarker(event.latLng);
-        });
-        // Adds a marker at the center of the map.
-        addMarker(haightAshbury);
+    	let map;
+		// Markers are stored in array format
+		let markers = [];
+		
+		function initMap() {
+		const haightAshbury = { lat: 37.769, lng: -122.446 };
+		map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 12,
+			center: haightAshbury,
+			mapTypeId: "terrain",
+		});
+		// This event listener will call addMarker() when the map is clicked.
+		map.addListener("click", (event) => {
+			addMarker(event.latLng);
+		});
+		// Adds a marker at the center of the map.
+		addMarker(haightAshbury);
       }
+      // Users can choose to hide, show or delete the markers
 
       // Adds a marker to the map and push to the array.
       function addMarker(location) {
@@ -260,9 +297,9 @@ if(isset($_POST["submit"]))
 
       // Sets the map on all markers in the array.
       function setMapOnAll(map) {
-        for (let i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-        }
+		for (let i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
       }
 
       // Removes the markers from the map, but keeps them in the array.
@@ -288,14 +325,18 @@ if(isset($_POST["submit"]))
       <input onclick="showMarkers();" type="button" value="Show All Markers" />
       <input onclick="deleteMarkers();" type="button" value="Delete Markers" />
     </div>
-    <div id="map"></div>
-    <form action="successPage.php" method="post">
-      <input type="text" name="locID" id = "locID" value="<?php echo $globalLocID?>">
-      <input type="text" name="lat" id="lat">
-      <input type="text" name="long" id="long">
-      <input type="submit" name="submit_btn" id="submit_btn">
-    </form>
-    <p>Click on the map to add markers.</p>
+	<div id="map"></div>
+	<div class="map-box">
+    	<h2>Click on the map to add markers.</h2>
+		<h3>OR</h3>
+		<h2>Manually enter the coordinates</h2>
+		<form action="successPage.php" method="POST">
+			<input type="text" name="locID" id = "locID" value="<?php echo $globalLocID ?>">
+			<input type="text" name="lat" id="lat">
+			<input type="text" name="long" id="long">
+			<input type="submit" name="submit_btn" id="submit_btn">
+		</form>
+	</div>
   </body>
 </html>
 
@@ -310,7 +351,8 @@ if(isset($_POST["submit"]))
     // {
     //   echo "Inserted Successfully!";
     // }
-    // else{
+	// else
+	// {
     //   echo "Error in inserting!";
     // }
   }

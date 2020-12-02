@@ -85,7 +85,7 @@
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
-            background-color: #f8f8f8;
+            /* background-color: #f8f8f8; */
             border: 2px solid #ccc;
             box-sizing: border-box;
         }
@@ -121,14 +121,14 @@
                 Select Image File to Upload:
             </td>
             <td>
-                <input type="file" name="file" id = "file_name">
+                <input type="file" name="file" id = "file_name" required>
             </td>
         </tr>
 
         <tr class="textbox">
             <td colspan="2">
                 Enter name of location: 
-                <input type="text" name = "loc_name" id="loc_name" placeholder="Ex: Iron Pillar, Le Passe Muraille, Headington Shark, etc.">
+                <input type="text" name = "loc_name" id="loc_name" placeholder="Ex: Iron Pillar, Le Passe Muraille, Headington Shark, etc." required>
             </td>
         </tr>
 
@@ -136,7 +136,7 @@
             <td colspan="2">
                 Description:
                 <!-- <input type="text" name="desc" id = "desc-box"> -->
-                <textarea name="desc" id="desc-box" cols="30" rows="5"></textarea>
+                <textarea name="desc" id="desc-box" cols="30" rows="5" required></textarea>
             </td>
         </tr>
         <tr>
