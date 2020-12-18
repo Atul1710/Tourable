@@ -20,8 +20,6 @@
 
         .upload-box {
             width: 50%;
-            margin-top: 90px;
-            margin-bottom: 90px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -106,7 +104,6 @@
         }
 
     </style>
-    <!-- // Include the database configuration file -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image storage and display</title>
@@ -114,39 +111,39 @@
 <body> 
     <div class="upload-box">
         <h1>Upload image to be stored</h1>
-    <form action="mapLocation.php" method="post" enctype="multipart/form-data" class="location-form" autocomplete="off">
-    <table class="tb-1">
-        <tr class="textbox">
-            <td>
-                Select Image File to Upload:
-            </td>
-            <td>
-                <input type="file" name="file" id = "file_name" required>
-            </td>
-        </tr>
+        <form action="mapLocation.php" method="post" enctype="multipart/form-data" class="location-form" autocomplete="off">
+        <table class="tb-1">
+            <tr class="textbox">
+                <td>
+                    Select Image File to Upload:
+                </td>
+                <td>
+                    <input type="file" name="file" id = "file_name" required>
+                </td>
+            </tr>
 
-        <tr class="textbox">
-            <td colspan="2">
-                Enter name of location: 
-                <input type="text" name = "loc_name" id="loc_name" placeholder="Ex: Iron Pillar, Le Passe Muraille, Headington Shark, etc." required>
-            </td>
-        </tr>
+            <tr class="textbox">
+                <td colspan="2">
+                    Enter name of location: 
+                    <input type="text" name = "loc_name" id="loc_name" placeholder="Ex: Iron Pillar, Le Passe Muraille, Headington Shark, etc." required>
+                </td>
+            </tr>
 
-        <tr class="textbox">
-            <td colspan="2">
-                Description:
-                <!-- <input type="text" name="desc" id = "desc-box"> -->
-                <textarea name="desc" id="desc-box" cols="30" rows="5" required></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" name = "submit" id = "submit" class="btn" value="Proceed to location coordinates upload" class="submit-btn">
-            </td>
-        </tr>
-    </table>
-    </form>
-    <button class="btn" onclick="history.back()" style="width: 96%;">Back</button>
-</div>
+            <tr class="textbox">
+                <td colspan="2">
+                    Description:
+                    <!-- <input type="text" name="desc" id = "desc-box"> -->
+                    <textarea name="desc" id="desc-box" cols="30" rows="5" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name = "submit" id = "submit" class="btn" value="Proceed to input location coordinates" class="submit-btn">
+                </td>
+            </tr>
+        </table>
+        </form>
+        <button class="btn" onclick="history.back()" style="width: 96%;">Back</button>
+    </div>
 </body>
 </html>

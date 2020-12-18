@@ -61,7 +61,6 @@ if(isset($_POST["submit"]))
     {
         $insert1 = $db->query("INSERT into locations (Name) VALUES ($desc)");
     }
-    }
     else{
         echo "Enter valid username";
     }
